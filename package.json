@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "docx-templates": "^4.13.0"
+  }
+}
