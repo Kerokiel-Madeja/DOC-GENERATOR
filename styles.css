@@ -31,10 +31,14 @@ body {
   width: fit-content;
 }
 
-.page-content {
-  height: 14.85cm;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30cm;
   width: 21cm;
-  margin: 1.27cm 1.78cm 0 1.78cm;
+  margin: 0 1.78cm 0 1.78cm;
+  page-break-after: always;
   overflow: hidden;
 }
 
