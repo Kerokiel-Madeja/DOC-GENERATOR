@@ -3,77 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Certificate of Appearance Generator</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>KEROKIEL DOC_GEN</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="form-container">
-      <h2>Certificate of Appearance</h2>
-      <form id="certForm">
-        <div class="form-group">
-          <label for="agency">Agency/Office/Company</label>
-          <input
-            type="text"
-            id="agency"
-            name="agency"
-            placeholder="Enter agency/office/company"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Enter address"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="name">Name of the Individual/Position</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter name of the individual"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="affiliation">Affiliation/Organization</label>
-          <input
-            type="text"
-            id="affiliation"
-            name="affiliation"
-            placeholder="Enter affiliation/organization"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="date">Date of Appearance</label>
-          <input type="date" id="date" name="date" required />
-        </div>
-        <div class="form-group">
-          <label for="purpose">Purpose of Appearance</label>
-          <textarea
-            id="purpose"
-            name="purpose"
-            placeholder="Enter purpose of appearance"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Generate Certificate</button>
-      </form>
+    <div class="buttons no-print">
+      <button class="add-content">Add Certificate</button>
+      <button class="print-page">Print</button>
     </div>
-    <script src="script.js" type="module"></script>
+
+    <div id="certificates-container"></div>
+
+    <!-- Modal Structure -->
+    <div id="inputModal" class="modal no-print">
+      <div class="modal-content">
+        <h2>Create New Certificate</h2>
+        <form id="certificateForm">
+          <label for="organizationType">Agency/Office/Company:</label>
+          <input type="text" id="organizationType" required />
+
+          <label for="address">Address:</label>
+          <input type="text" id="address" required />
+
+          <label for="fullName">Full Name:</label>
+          <input type="text" id="fullName" required />
+
+          <label for="institutionName">Institution Name:</label>
+          <input type="text" id="institutionName" required />
+
+          <label for="date">Date of Appearance:</label>
+          <input type="date" id="date" required />
+
+          <label for="purpose">Purpose:</label>
+          <input type="text" id="purpose" required />
+
+          <div class="modal-buttons">
+            <button type="submit">Add Certificate</button>
+            <button type="button" class="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="./index.js"></script>
   </body>
 </html>
