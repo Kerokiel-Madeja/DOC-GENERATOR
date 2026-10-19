@@ -1,5 +1,5 @@
 /**
- * KEROKIEL DOC_GEN — Universal Certificate & Document Generator
+ * CertiPrint Studio — Smart Certificate & Document Generator
  * Features:
  * 1. Multi-Vector DOCX Parser (JSZip, Paragraph DOM Stitcher, Media Extractor)
  * 2. Universal PDF Engine (pdf-lib, AcroForm extraction, Vector Stamping)
