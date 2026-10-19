@@ -391,40 +391,45 @@ body::before {
   border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* Individual Printable Sheet Container */
+/* Individual Printable Sheet Container (Equal 50/50 Split) */
 .page-container {
   position: relative;
   background-color: var(--bg-paper);
   color: var(--text-dark);
   width: 100%;
-  min-height: 297mm;
-  padding: 12mm 15mm;
+  height: 297mm;
+  padding: 0;
   border-radius: 4px;
   box-shadow: var(--shadow-paper);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-sizing: border-box;
   transition: transform 0.2s ease;
   font-family: var(--font-doc);
   line-height: 1.35;
+  overflow: hidden;
 }
 
-/* Individual Certificate Section (2 Per Sheet) */
+/* Individual Certificate Section (2 Per Sheet - Equal Halves) */
 .page {
-  flex: 1;
+  flex: 1 1 50%;
+  height: 50%;
+  max-height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 4mm 2mm;
+  padding: 12mm 16mm;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* Dashed Dividing Line Between Copies */
+/* Dashed Dividing Line Between Copies (Exact Midpoint) */
 .cut-divider {
   border-top: 1px dashed #94a3b8;
   width: 100%;
-  margin: 6mm 0;
+  margin: 0;
+  height: 0;
+  flex-shrink: 0;
 }
 
 /* Certificate Inner Layout */
@@ -733,9 +738,21 @@ body::before {
 
   .page-container {
     width: 100%;
+    height: auto;
     min-height: auto;
-    padding: 18px 20px;
+    padding: 0;
     margin: 0 auto;
+  }
+
+  .page {
+    flex: none;
+    height: auto;
+    max-height: none;
+    padding: 20px 16px;
+  }
+
+  .cut-divider {
+    margin: 12px 0;
   }
 }
 
@@ -781,17 +798,17 @@ body::before {
   }
 
   .page-container {
-    padding: 14px 12px;
+    padding: 0;
   }
 }
 
 /* --------------------------------------------------------------------------
-   PRINT ENGINE OPTIMIZATION (CRITICAL: ZERO CUTOFF, NO BLANK PAGES, CLEAN MARGINS)
+   PRINT ENGINE OPTIMIZATION (CRITICAL: EXACT 50/50 EQUAL CUT, ZERO BOTTOM VOID)
    -------------------------------------------------------------------------- */
 @media print {
   @page {
     size: portrait;
-    margin: 8mm 12mm; /* Perfectly fits standard A4 and US Letter without clipping */
+    margin: 0; /* Zero margin enables exact 50/50 vertical division */
   }
 
   /* Reset global layout */
@@ -801,6 +818,8 @@ body::before {
     color: #000000 !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     font-size: 10.5pt !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -839,11 +858,16 @@ body::before {
   .sheet-wrapper {
     width: 100% !important;
     max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     page-break-after: always !important;
     break-after: page !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .sheet-wrapper:last-child {
@@ -851,7 +875,7 @@ body::before {
     break-after: avoid !important;
   }
 
-  /* Strict Print Sheet Dimensioning */
+  /* Strict Print Sheet Dimensioning (Equal 50/50 Halves) */
   .page-container {
     box-shadow: none !important;
     border: none !important;
@@ -859,32 +883,40 @@ body::before {
     padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
-    min-height: auto !important;
+    height: 100% !important;
+    max-height: 100% !important;
     background: transparent !important;
+    display: flex !important;
+    flex-direction: column !important;
     page-break-after: auto !important;
     break-after: auto !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-    overflow: visible !important;
-  }
-
-  /* Eliminate extra trailing blank page */
-  .page-container:last-child {
-    page-break-after: avoid !important;
-    break-after: avoid !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .page {
+    flex: 1 1 50% !important;
+    height: calc(50% - 1px) !important;
+    max-height: calc(50% - 1px) !important;
+    box-sizing: border-box !important;
+    padding: 10mm 15mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-    padding: 4mm 0 !important;
+    overflow: hidden !important;
     border: none !important;
   }
 
   .cut-divider {
+    width: 100% !important;
     border-top: 1px dashed #555 !important;
-    margin: 4mm 0 !important;
+    margin: 0 !important;
+    height: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   .box {
