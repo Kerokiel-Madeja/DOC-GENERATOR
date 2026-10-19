@@ -726,9 +726,13 @@ body::before {
    Responsive Layout (Mobile & Tablet)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 900px) {
-  .page-container {
+  .sheet-wrapper {
     width: 100%;
     max-width: 760px;
+  }
+
+  .page-container {
+    width: 100%;
     min-height: auto;
     padding: 18px 20px;
     margin: 0 auto;
@@ -771,10 +775,9 @@ body::before {
     margin-top: 10px;
   }
 
-  .sheet-actions {
-    position: static;
-    margin-bottom: 0.5rem;
-    justify-content: flex-end;
+  .sheet-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .page-container {
@@ -813,6 +816,7 @@ body::before {
   .app-header,
   .workspace-controls,
   .toolbar,
+  .sheet-header,
   .sheet-actions,
   .modal,
   .empty-state,
@@ -831,6 +835,22 @@ body::before {
     display: block !important;
   }
 
+  /* Sheet Wrapper Print Rules */
+  .sheet-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .sheet-wrapper:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
   /* Strict Print Sheet Dimensioning */
   .page-container {
     box-shadow: none !important;
@@ -842,8 +862,8 @@ body::before {
     height: auto !important;
     min-height: auto !important;
     background: transparent !important;
-    page-break-after: always !important;
-    break-after: page !important;
+    page-break-after: auto !important;
+    break-after: auto !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
     overflow: visible !important;
